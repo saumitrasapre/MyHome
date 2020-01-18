@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="10dp"
+    android:orientation="vertical"
+    tools:context=".SecurityComplaintViewDetails">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:gravity="center"
+        android:id="@+id/SecNameTextView"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:gravity="center"
+        android:id="@+id/SecPhoneNumber"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:gravity="center"
+        android:id="@+id/SecCategoryofComplaint"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:gravity="center"
+        android:id="@+id/SecActualComplaint"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:gravity="center"
+        android:id="@+id/StatusofComplaint"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Completed"
+        android:id="@+id/SecComplaintSetCompleted"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_btn"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        ></Button>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel Completed Complaint"
+        android:id="@+id/SecComplaintCancelBtn"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_btn"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        ></Button>
+
+
+
+
+</LinearLayout>

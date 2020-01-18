@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="10dp"
+    android:orientation="vertical"
+    tools:context=".Complaints">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameResidentforComplaint"
+        android:hint="Name"
+        android:inputType="textPersonName"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/colorPrimary"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phoneResidentComplaint"
+        android:hint="Phone"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/colorPrimary"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/complaintCategory"
+        android:hint="Category Of Complaint"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/colorPrimary"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/complaintText"
+        android:hint="Complaint"
+        android:singleLine="true"
+        android:textColor="@color/colorPrimary"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/complaintRegister"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_btn"
+        android:text="Log Complaint"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
+
+
+</android.widget.LinearLayout>

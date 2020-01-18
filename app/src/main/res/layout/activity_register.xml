@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_image_one_signin"
+    android:gravity="center"
+    android:padding="50dp"
+    android:orientation="vertical"
+    tools:context=".RegisterActivity"
+    >
+
+
+  <ImageView
+      android:id="@+id/imageView3"
+      android:layout_width="184dp"
+      android:layout_height="168dp"
+      app:srcCompat="@drawable/registerplus" />
+
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Register User"
+      android:layout_marginTop="30dp"
+      android:gravity="center"
+      android:textAllCaps="true"
+      android:textSize="27sp"
+      android:padding="10dp"
+      android:textStyle="bold"/>
+
+  <EditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Email ID"
+      android:id="@+id/email"
+      android:inputType="textEmailAddress"
+      android:maxLines="1"
+      android:singleLine="true"
+      android:textColor="@color/colorPrimary"/>
+
+  <!--android:imeActionId="@+id/login"-->
+
+  <EditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/password"
+      android:focusableInTouchMode="true"
+      android:hint="Password"
+      android:inputType="textPassword"
+      android:maxLines="1"
+      android:singleLine="true"
+      android:textColor="@color/colorPrimary"/>
+
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/sign_up_button"
+      style="?android:textAppearanceSmall"
+      android:layout_marginTop="16dp"
+      android:background="@color/colorPrimary"
+      android:text="Sign Up"
+      android:textColor="@color/white"
+      android:textStyle="bold"/>
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/sign_in_button"
+      android:layout_marginTop="20dp"
+      android:background="@color/white"
+      android:text="Already Registered? Login now"
+      android:gravity="center"
+      android:textColor="@color/colorPrimary"
+      android:textStyle="bold"/>
+
+
+
+
+</android.widget.LinearLayout>

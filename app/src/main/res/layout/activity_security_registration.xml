@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="10dp"
+    tools:context=".SecurityRegistration">
+
+
+  <EditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/nameSecurity"
+      android:hint="Name"
+      android:inputType="textPersonName"
+      android:maxLines="1"
+      android:singleLine="true"
+      android:textColor="@color/colorPrimary"/>
+
+  <EditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/phoneSecurity"
+      android:hint="Phone"
+      android:inputType="phone"
+      android:maxLines="1"
+      android:singleLine="true"
+      android:textColor="@color/colorPrimary"/>
+
+  <Button
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/securityRegister"
+      android:layout_marginTop="20dp"
+      android:background="@color/colorPrimary"
+      android:text="Register"
+      android:textStyle="bold"
+      android:textColor="@color/white"/>
+
+</android.widget.LinearLayout>
