@@ -42,6 +42,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="34dp"
         android:layout_marginBottom="43dp"
+        android:background="@drawable/bg_btn"
+        android:textColor="@color/white"
         android:text="Upload Image"
         android:visibility="gone"/>
 
