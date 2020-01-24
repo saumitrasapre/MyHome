@@ -30,13 +30,35 @@
       android:singleLine="true"
       android:textColor="@color/colorPrimary"/>
 
-  <ImageView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:minWidth="400dp"
-      android:minHeight="350dp"
-      android:id="@+id/visitorImage"
-      />
+  <RelativeLayout
+      android:layout_width="361dp"
+      android:layout_height="364dp">
+
+    <Button
+        android:id="@+id/uploadbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/graphicOverlay"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="43dp"
+        android:text="Upload Image"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/visitorImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="400dp"
+        android:minHeight="350dp"></ImageView>
+
+    <com.example.myhome.Helper.GraphicOverlay
+        android:id="@+id/graphicOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="351dp" />
+
+
+  </RelativeLayout>
 
 
   <LinearLayout
@@ -49,7 +71,9 @@
         android:id="@+id/flatNoList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/colorPrimary" >
+
+    </ListView>
 
 
   </LinearLayout>

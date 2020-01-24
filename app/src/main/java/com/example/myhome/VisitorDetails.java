@@ -1,30 +1,29 @@
 package com.example.myhome;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -33,6 +32,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.myhome.Helper.GraphicOverlay;
+import com.example.myhome.Helper.RectOverlay;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,6 +42,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.face.FirebaseVisionFace;
+import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetector;
+import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetectorOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -52,7 +58,10 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import dmax.dialog.SpotsDialog;
 
 
 public class VisitorDetails extends AppCompatActivity {
@@ -60,12 +69,14 @@ public class VisitorDetails extends AppCompatActivity {
   EditText visitorName,visitorPhone;
   ListView flatNos;
   ImageView myImageView;
+  Button uploadBtn;
   Bitmap capturedPhoto;
   Uri mImageUri;
   private ProgressDialog pd;
   String vName;
   Long vPhone;
   String uploadID="Visitor";
+  int faces=0;
 
   private StorageReference mStorageRef;
   private DatabaseReference mDatabaseRef;
@@ -75,6 +86,9 @@ public class VisitorDetails extends AppCompatActivity {
   private RequestQueue mRequestQueue;
   String flNo;
   static final int REQUEST_IMAGE_CAPTURE=2;
+
+  GraphicOverlay graphicOverlay;
+  AlertDialog alertDialog;
 
 
   @Override
@@ -91,9 +105,17 @@ public class VisitorDetails extends AppCompatActivity {
     mStorageRef= FirebaseStorage.getInstance().getReference("uploads"); //Save it in a folder called uploads
     mDatabaseRef=FirebaseDatabase.getInstance().getReference().child("visitor");
 
+      graphicOverlay=findViewById(R.id.graphicOverlay);
+      uploadBtn=findViewById(R.id.uploadbutton);
+
+    alertDialog=new SpotsDialog.Builder()
+            .setContext(this)
+            .setCancelable(false)
+            .setMessage("Detecting Faces...")
+            .build();
 
     pd=new ProgressDialog(this);
-    pd.setMessage("Loading...");
+    pd.setMessage("Uploading...");
     pd.setCancelable(true);
     pd.setCanceledOnTouchOutside(false);
 
@@ -151,10 +173,7 @@ public class VisitorDetails extends AppCompatActivity {
         Intent myIntent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(myIntent,REQUEST_IMAGE_CAPTURE);//We assign the id(which we created earlier) to our intent
 
-
         //finish();
-
-
 
       }
     });
@@ -167,15 +186,79 @@ public class VisitorDetails extends AppCompatActivity {
       final Bundle extras=data.getExtras();
       capturedPhoto=(Bitmap)extras.get("data");
 
+      alertDialog.show();
+      Bitmap bitmap=capturedPhoto;
+      bitmap= Bitmap.createScaledBitmap(bitmap,myImageView.getWidth(),myImageView.getHeight(),false);
       myImageView.setImageBitmap(capturedPhoto);
+      processFaceDetection(bitmap);
       mImageUri=getImageUri(this,capturedPhoto);
-      pd.show();
-      uploadFile();
+
+
 
 
 
     }
   }
+
+  private void processFaceDetection(Bitmap bitmap) {
+
+    FirebaseVisionImage firebaseVisionImage=FirebaseVisionImage.fromBitmap(bitmap);
+    FirebaseVisionFaceDetectorOptions firebaseVisionFaceDetectorOptions=new FirebaseVisionFaceDetectorOptions.Builder().build();
+
+    FirebaseVisionFaceDetector firebaseVisionFaceDetector= FirebaseVision.getInstance().getVisionFaceDetector(firebaseVisionFaceDetectorOptions);
+
+    firebaseVisionFaceDetector.detectInImage(firebaseVisionImage).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionFace>>() {
+      @Override
+      public void onSuccess(List<FirebaseVisionFace> firebaseVisionFaces) {
+
+        faces =getFaceResults(firebaseVisionFaces);
+
+        if(faces!=0) {
+          uploadBtn.setVisibility(View.VISIBLE);
+          uploadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              pd.show();
+              uploadFile();
+            }
+          });
+        }
+        else if(faces==0)
+        {
+          Toast.makeText(getApplicationContext(),"No faces detected...",Toast.LENGTH_SHORT).show();
+        }
+
+      }
+    }).addOnFailureListener(new OnFailureListener() {
+      @Override
+      public void onFailure(@NonNull Exception e) {
+       // Toast.makeText(getApplicationContext(),"Error: "+e,Toast.LENGTH_SHORT).show();
+        faces=0;
+        if(faces==0)
+        {
+          Toast.makeText(getApplicationContext(),"No faces detected...",Toast.LENGTH_SHORT).show();
+        }
+      }
+    });
+
+
+  }
+
+  private int getFaceResults(List<FirebaseVisionFace> firebaseVisionFaces) {
+    int counter=0;
+
+    for(FirebaseVisionFace face: firebaseVisionFaces)
+    {
+      Rect rect=face.getBoundingBox();
+      RectOverlay rectOverlay= new RectOverlay(graphicOverlay,rect);
+      graphicOverlay.add(rectOverlay);
+      counter++;
+    }
+   alertDialog.dismiss();
+    return counter;
+
+  }
+
   private  String getFileExtension(Uri uri)
   {
     ContentResolver cr=getContentResolver();
