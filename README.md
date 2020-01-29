@@ -30,9 +30,9 @@ MyHome simply requires Android Studio 3.0+ and Java JDK 1.8+ to run on your comp
 
 ### Screenshots
 
-Splash Screen             |  Resident Dashboard
-:-------------------------:|:-------------------------:
-<img src="https://raw.githubusercontent.com/saumitrasapre/MyHome/master/Screenshots/splash.png" alt="drawing" width="200"/> | <img src="https://raw.githubusercontent.com/saumitrasapre/MyHome/master/Screenshots/resident dashboard.png" alt="drawing" width="200"/>
+Splash Screen             |  Resident Dashboard        | Delivery Schedule            
+:-------------------------:|:-------------------------:|:-------------------------:
+<img src="https://raw.githubusercontent.com/saumitrasapre/MyHome/master/Screenshots/splash.png" alt="drawing" width="200"/> | <img src="https://raw.githubusercontent.com/saumitrasapre/MyHome/master/Screenshots/resident dashboard.png" alt="drawing" width="200"/>| <img src="https://raw.githubusercontent.com/saumitrasapre/MyHome/master/Screenshots/deliveryschedule.png" alt="drawing" width="200"/>
 
 
 
