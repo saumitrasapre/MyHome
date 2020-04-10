@@ -21,8 +21,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
@@ -42,6 +40,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.Nullable;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.face.FirebaseVisionFace;
@@ -125,14 +124,14 @@ public class VisitorDetails extends AppCompatActivity {
     DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("member");
     reference.addValueEventListener(new ValueEventListener() {
       @Override
-      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+      public void onDataChange(DataSnapshot dataSnapshot) {
 
         collectFlatNos((Map<String,Object>)dataSnapshot.getValue());
 
       }
 
       @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {
+      public void onCancelled(DatabaseError databaseError) {
 
       }
     });
@@ -151,7 +150,7 @@ public class VisitorDetails extends AppCompatActivity {
         DatabaseReference refer=FirebaseDatabase.getInstance().getReference().child("member");
         refer.addValueEventListener(new ValueEventListener() {
           @Override
-          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+          public void onDataChange(DataSnapshot dataSnapshot) {
             for(DataSnapshot snapshot: dataSnapshot.getChildren())
             {
               Member member=snapshot.getValue(Member.class);
@@ -164,7 +163,7 @@ public class VisitorDetails extends AppCompatActivity {
           }
 
           @Override
-          public void onCancelled(@NonNull DatabaseError databaseError) {
+          public void onCancelled(DatabaseError databaseError) {
 
           }
         });
@@ -181,20 +180,17 @@ public class VisitorDetails extends AppCompatActivity {
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-    if(requestCode==REQUEST_IMAGE_CAPTURE && resultCode==RESULT_OK)
-    {
-      final Bundle extras=data.getExtras();
-      capturedPhoto=(Bitmap)extras.get("data");
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+      final Bundle extras = data.getExtras();
+      capturedPhoto = (Bitmap) extras.get("data");
 
       alertDialog.show();
-      Bitmap bitmap=capturedPhoto;
-      bitmap= Bitmap.createScaledBitmap(bitmap,myImageView.getWidth(),myImageView.getHeight(),false);
+      Bitmap bitmap = capturedPhoto;
+      bitmap = Bitmap.createScaledBitmap(bitmap, myImageView.getWidth(), myImageView.getHeight(), false);
       myImageView.setImageBitmap(capturedPhoto);
       processFaceDetection(bitmap);
-      mImageUri=getImageUri(this,capturedPhoto);
-
-
-
+      mImageUri = getImageUri(this, capturedPhoto);
 
 
     }
@@ -231,7 +227,7 @@ public class VisitorDetails extends AppCompatActivity {
       }
     }).addOnFailureListener(new OnFailureListener() {
       @Override
-      public void onFailure(@NonNull Exception e) {
+      public void onFailure(Exception e) {
        // Toast.makeText(getApplicationContext(),"Error: "+e,Toast.LENGTH_SHORT).show();
         faces=0;
         if(faces==0)
@@ -292,7 +288,7 @@ public class VisitorDetails extends AppCompatActivity {
         }
       }).addOnFailureListener(new OnFailureListener() {
         @Override
-        public void onFailure(@NonNull Exception e) {
+        public void onFailure(Exception e) {
           Toast.makeText(VisitorDetails.this,e.getMessage(),Toast.LENGTH_SHORT).show();
 
         }
