@@ -6,7 +6,7 @@ MyHome is a simple app that serves as the perfect solution to make living in an 
   - Enhance security of gated complexes
   - Improve communication between residents and security personnel
 
-# Amazing Features!
+# Features
 
   - Verify unexpected visitors
   - Daily Staff Management
@@ -26,7 +26,7 @@ Keeping these issues in mind, we thought of providing a digital platform to cate
 
 ### Installation
 
-MyHome simply requires Android Studio 3.0+ and Java JDK 1.8+ to run on your computer.
+Requires Android Studio 3.0+ and Java JDK 1.8+ to run.
 
 ### Screenshots
 
@@ -35,13 +35,6 @@ Splash Screen             |  Resident Dashboard        | Delivery Schedule
 <img src="https://raw.githubusercontent.com/saumitrasapre/MyHome/master/Screenshots/splash.png" alt="drawing" width="200"/> | <img src="https://raw.githubusercontent.com/saumitrasapre/MyHome/master/Screenshots/resident dashboard.png" alt="drawing" width="200"/>| <img src="https://raw.githubusercontent.com/saumitrasapre/MyHome/master/Screenshots/deliveryschedule.png" alt="drawing" width="200"/>
 
 
-
-
-
-### Development
-
-MyHome is in no way a completed project. It is still a work in progress, and we've got miles to go!
-We're still working on it to make it an awesome experience for every resident in a gated community!
 
 
 **Saumitra Sapre** -[saumitrasapre](https://github.com/saumitrasapre) |  **Mihir Shah** - [mihirshah1999](https://github.com/mihirshah1999)
