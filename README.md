@@ -44,12 +44,7 @@ MyHome is in no way a completed project. It is still a work in progress, and we'
 We're still working on it to make it an awesome experience for every resident in a gated community!
 
 
-
-
-## Authors
-
-* **Saumitra Sapre** - *Co-Contributor* [saumitrasapre](https://github.com/saumitrasapre)
-* **Mihir Shah** - *Co-Contributor* [mihirshah1999](https://github.com/mihirshah1999)
+**Saumitra Sapre** -[saumitrasapre](https://github.com/saumitrasapre) |  **Mihir Shah** - [mihirshah1999](https://github.com/mihirshah1999)
 
 
 
